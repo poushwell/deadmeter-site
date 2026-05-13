@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #FAF9F5;
+  --paper: #FFFFFF;
+  --surface-warm: #F5F3EC;
+  --surface-dark: #141413;
+  --surface-dark-2: #1F1E1B;
+
+  --border: #E5E2D8;
+  --border-warm: #C9C4B5;
+  --rule: #1A1A1A;
+
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B68;
+  --text-tertiary: #918E83;
+  --text-on-dark: #FAF9F5;
+  --text-on-dark-secondary: #B0AEA5;
+  --text-on-dark-tertiary: #6B6B68;
+
+  --accent: #D97757;
+  --accent-hover: #C46241;
+  --accent-bordeaux: #8B1A1A;
+
+  --live: #5C8862;
+  --hybrid: #B89548;
+  --synthetic: #C47547;
+  --dead: #985858;
+
+  --font-serif: 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-10: 64px;
+  --space-12: 80px;
+  --space-14: 96px;
+  --space-16: 128px;
+
+  --container-max: 1280px;
+  --container-reading: 720px;
+  --container-padding-desktop: 32px;
+  --container-padding-mobile: 20px;
+
+  --transition-fast: 0.15s ease;
+  --transition-medium: 0.25s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.font-feature-tnum {
+  font-feature-settings: 'tnum' 1;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding-desktop);
+}
+
+.container-reading {
+  max-width: var(--container-reading);
+  margin: 0 auto;
+  padding: 0 var(--container-padding-desktop);
+}
+
+@media (max-width: 768px) {
+  .container,
+  .container-reading {
+    padding: 0 var(--container-padding-mobile);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
