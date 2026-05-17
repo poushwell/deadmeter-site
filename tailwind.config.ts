@@ -28,9 +28,9 @@ const config: Config = {
         dead:      '#985858',
       },
       fontFamily: {
-        sans:  ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Source Serif Pro', 'Georgia', 'serif'],
-        mono:  ['IBM Plex Mono', 'Courier New', 'monospace'],
+  sans:  ['var(--font-inter)',         'system-ui', 'sans-serif'],
+  serif: ['var(--font-source-serif)',  'Georgia',   'serif'],
+  mono:  ['var(--font-ibm-plex-mono)', 'Courier New', 'monospace'],
       },
     },
   },

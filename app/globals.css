@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 :root {
   --bg: #FAF9F5;
@@ -29,9 +28,9 @@
   --synthetic: #C47547;
   --dead: #985858;
 
-  --font-serif: 'Source Serif Pro', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --font-serif: var(--font-source-serif),  Georgia, 'Times New Roman', serif;
+  --font-sans:  var(--font-inter),          system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:  var(--font-ibm-plex-mono),  'Courier New', monospace;
 
   --weight-regular: 400;
   --weight-medium: 500;
