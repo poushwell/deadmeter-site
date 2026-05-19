@@ -3,7 +3,7 @@
   "short_name": "Deadmeter",
   "description": "Internet content tracking with confidence intervals.",
   "start_url": "/",
-  "display": "browser",
+  "display": "standalone",
   "background_color": "#FAF9F5",
   "theme_color": "#FAF9F5",
   "icons": [
