@@ -61,6 +61,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 70px;
 }
 
 body {
@@ -87,8 +88,10 @@ a {
 /* Подчёркивание только для ссылок внутри текста */
 p a {
   text-decoration: underline;
+  text-decoration-style: solid;
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
+  text-decoration-skip-ink: none;
 }
 
 :focus-visible {
@@ -109,7 +112,8 @@ p a {
 .container-reading {
   max-width: var(--container-reading);
   margin: 0 auto;
-  padding: 0 var(--container-padding-desktop);
+  padding-left: var(--container-padding-desktop);
+  padding-right: var(--container-padding-desktop);
 }
 
 @media (max-width: 768px) {
@@ -133,4 +137,13 @@ p a {
   .footer-brand {
     grid-column: auto;
   }
+  /* Inline code — methodology and article pages */
+:not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--surface-warm);
+  padding: 2px 6px;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
 }

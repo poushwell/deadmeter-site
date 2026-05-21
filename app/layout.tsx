@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Source_Serif_4, IBM_Plex_Mono } from 'next/font/google';
+import { Header } from '@/components/layout/Header';
+import { Footer } from '@/components/layout/Footer';
 import './globals.css';
 
 const inter = Inter({
@@ -32,26 +34,21 @@ export const metadata: Metadata = {
   description:
     'Weekly measurements of AI saturation, bot activity, and information manipulation across major platforms. Open methodology. Apolitical scope.',
   metadataBase: new URL('https://deadmeter.com'),
-  openGraph: {
-    siteName: 'Deadmeter',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-  },
+  openGraph: { siteName: 'Deadmeter', type: 'website' },
+  twitter: { card: 'summary_large_image' },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       className={`${inter.variable} ${sourceSerif.variable} ${ibmPlexMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

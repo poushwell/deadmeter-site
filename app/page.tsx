@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { PulseSignupForm } from '@/components/shared/PulseSignupForm';
+import { SchemaMarkup } from '@/components/shared/SchemaMarkup';
 
 export const metadata: Metadata = {
   title: 'Deadmeter · Internet content tracking with confidence intervals',
@@ -29,8 +31,7 @@ const schemaOrg = {
       '@type': 'WebSite',
       name: 'Deadmeter',
       url: 'https://deadmeter.com',
-      description:
-        'Internet content tracking with calibrated confidence intervals.',
+      description: 'Internet content tracking with calibrated confidence intervals.',
       publisher: { '@type': 'Person', name: 'Pavel Ishchin' },
     },
     {
@@ -82,58 +83,13 @@ const schemaOrg = {
 export default function LandingPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
-      />
-
-      {/* HEADER */}
-      <header
-        className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]"
-        style={{ backdropFilter: 'blur(8px)' }}
-      >
-        <div className="container flex items-center justify-between py-6">
-          <Link
-            href="/"
-            className="font-serif text-2xl font-bold tracking-[-0.02em] text-[var(--text-primary)]"
-          >
-            Deadmeter
-          </Link>
-          <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
-            <Link href="/methodology" className="text-[15px] font-medium text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
-              Methodology
-            </Link>
-            <Link href="/tools" className="text-[15px] font-medium text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
-              Tools
-            </Link>
-            <Link href="/pricing" className="text-[15px] font-medium text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
-              Pricing
-            </Link>
-            <Link href="/faq" className="text-[15px] font-medium text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">
-              FAQ
-            </Link>
-            <Link
-              href="/cert"
-              className="ml-2 px-4 py-2 border border-[var(--text-primary)] text-[14px] font-medium text-[var(--text-primary)] hover:bg-[var(--text-primary)] hover:text-[var(--bg)] transition-colors"
-            >
-              Sign in
-            </Link>
-          </nav>
-          <button className="md:hidden p-1 text-[var(--text-secondary)]" aria-label="Open navigation menu">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <rect y="3" width="20" height="1.5" rx="0.75" />
-              <rect y="9" width="20" height="1.5" rx="0.75" />
-              <rect y="15" width="20" height="1.5" rx="0.75" />
-            </svg>
-          </button>
-        </div>
-      </header>
+      <SchemaMarkup schema={schemaOrg} />
 
       <main>
         {/* HERO */}
-        <section aria-labelledby="hero-heading" className="py-[100px] md:py-[120px] bg-[var(--bg)]">
+        <section aria-labelledby="hero-heading" className="py-[80px] md:py-[120px] bg-[var(--bg)]">
           <div className="container">
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="max-w-[800px] mx-auto text-center">
               <h1
                 id="hero-heading"
                 className="font-serif font-bold text-[var(--text-primary)] leading-[1.05] tracking-[-0.025em] mb-8"
@@ -147,25 +103,28 @@ export default function LandingPage() {
                 no certainty theatre.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/pulse"
-                  className="inline-flex items-center justify-center px-7 py-[14px] bg-[var(--accent)] text-white text-sm font-medium hover:bg-[var(--accent-hover)] transition-colors"
-                >
-                  See latest Pulse
-                </Link>
-                <Link
-                  href="/cert"
-                  className="inline-flex items-center justify-center px-[27px] py-[13px] border border-[var(--text-primary)] text-[var(--text-primary)] text-sm font-medium hover:bg-[var(--text-primary)] hover:text-[var(--bg)] transition-colors"
-                >
-                  Run Death Certificate
-                </Link>
-              </div>
+  <Link
+    href="/pulse"
+    className="w-full sm:w-auto inline-flex items-center justify-center px-[27px] py-[13px] border border-[var(--text-primary)] text-[var(--text-primary)] text-sm font-medium bg-[var(--accent)]  text-white  hover:bg-[var(--accent-hover)] hover:text-white transition-colors"
+  >
+    See latest Pulse
+  </Link>
+  <Link
+    href="/cert"
+    className="w-full sm:w-auto inline-flex items-center justify-center px-[27px] py-[13px] border border-[var(--text-primary)] text-[var(--text-primary)] text-sm font-medium bg-[var(--accent)]  text-white  hover:bg-[var(--accent-hover)] hover:text-white transition-colors"
+  >
+    Run Death Certificate
+  </Link>
+</div>
             </div>
           </div>
         </section>
 
         {/* WHAT WE MEASURE */}
-        <section aria-labelledby="measure-heading" className="py-[80px] md:py-[100px] bg-[var(--surface-warm)] border-y border-[var(--border)]">
+        <section
+          aria-labelledby="measure-heading"
+          className="py-[80px] md:py-[100px] bg-[var(--surface-warm)] border-y border-[var(--border)]"
+        >
           <div className="container">
             <div className="mb-14">
               <h2
@@ -247,7 +206,10 @@ export default function LandingPage() {
         </section>
 
         {/* HOW IT WORKS */}
-        <section aria-labelledby="how-heading" className="py-[80px] md:py-[100px] bg-[var(--bg)]">
+        <section
+          aria-labelledby="how-heading"
+          className="py-[80px] md:py-[100px] bg-[var(--bg)]"
+        >
           <div className="container">
             <div className="max-w-2xl">
               <h2
@@ -265,7 +227,8 @@ export default function LandingPage() {
               <p className="text-[17px] text-[var(--text-secondary)] leading-[1.60] mb-5">
                 The methodology is versioned with semantic versioning and cryptographic hashes.
                 Every measurement reports both sampling uncertainty (from bootstrap resampling) and
-                calibration uncertainty (from baseline contamination estimates) as separate components.
+                calibration uncertainty (from baseline contamination estimates) as separate
+                components.
               </p>
               <p className="text-[17px] text-[var(--text-secondary)] leading-[1.60] mb-10">
                 The full methodology is published openly. Calibration corpora rotate quarterly.
@@ -278,7 +241,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* WHO USES DEADMETER — dark inversion card */}
+        {/* WHO USES DEADMETER */}
         <section
           aria-labelledby="who-heading"
           className="mx-4 md:mx-8 rounded-[16px] md:rounded-[24px] py-[60px] px-7 md:py-[100px] md:px-16 bg-[var(--surface-dark)] overflow-hidden"
@@ -333,7 +296,10 @@ export default function LandingPage() {
         </section>
 
         {/* ABOUT THIS PROJECT */}
-        <section aria-labelledby="about-label" className="py-[80px] md:py-[100px] bg-[var(--bg)]">
+        <section
+          aria-labelledby="about-label"
+          className="py-[80px] md:py-[100px] bg-[var(--bg)]"
+        >
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-8 md:gap-20 items-start">
               <div className="pt-1">
@@ -377,113 +343,17 @@ export default function LandingPage() {
         </section>
 
         {/* SUBSCRIBE TO PULSE */}
-        <section aria-labelledby="subscribe-heading" className="py-[80px] md:py-[100px] bg-[var(--surface-warm)] border-t border-[var(--border)]">
+        <section
+          aria-label="Subscribe to Pulse"
+          className="py-[80px] md:py-[100px] bg-[var(--surface-warm)] border-t border-[var(--border)]"
+        >
           <div className="container">
-            <div className="max-w-md mx-auto text-center">
-              <h2
-                id="subscribe-heading"
-                className="font-serif text-[32px] font-bold text-[var(--text-primary)] leading-[1.15] tracking-[-0.02em] mb-3"
-              >
-                Pulse arrives weekly
-              </h2>
-              <p className="text-[17px] text-[var(--text-secondary)] mb-10">
-                A short, sober summary of the week&apos;s measurements. Tuesday mornings. Free forever.
-              </p>
-              <form action="/api/subscribe" method="POST" className="flex flex-col sm:flex-row">
-                <label htmlFor="subscribe-email" className="sr-only">Email address</label>
-                <input
-                  id="subscribe-email"
-                  type="email"
-                  name="email"
-                  placeholder="your@email.com"
-                  required
-                  autoComplete="email"
-                  className="flex-1 px-4 py-3 border border-[var(--border)] bg-white text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] text-[16px] focus:outline-none focus:border-[var(--text-primary)] transition-colors"
-                  style={{ borderRadius: 0 }}
-                />
-                <button
-                  type="submit"
-                  className="px-7 py-3 bg-[var(--accent)] text-white text-sm font-medium hover:bg-[var(--accent-hover)] transition-colors whitespace-nowrap"
-                  style={{ borderRadius: 0 }}
-                >
-                  Subscribe
-                </button>
-              </form>
-              <p className="text-[13px] text-[var(--text-tertiary)] mt-5">
-                We send the weekly Pulse and nothing else. No marketing. No tracking pixels.
-                Unsubscribe with one click.
-              </p>
+            <div className="max-w-[480px] mx-auto">
+              <PulseSignupForm centered />
             </div>
           </div>
         </section>
       </main>
-
-      {/* FOOTER */}
-      <footer className="bg-[var(--bg)] pt-16 pb-10">
-        <div className="container">
-          <div className="footer-grid grid grid-cols-2 gap-8 mb-14">
-            <div className="footer-brand col-span-2 md:col-span-1">
-              <Link
-                href="/"
-                className="font-serif text-2xl font-bold tracking-[-0.02em] text-[var(--text-primary)] block mb-3"
-              >
-                Deadmeter
-              </Link>
-              <p className="text-[14px] text-[var(--text-secondary)] leading-[1.55] max-w-[280px]">
-                Internet content tracking with calibrated confidence intervals.
-              </p>
-            </div>
-
-            <div>
-              <h4 className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-tertiary)] mb-4">
-                Product
-              </h4>
-              <ul className="space-y-2 list-none p-0 m-0">
-                <li><Link href="/methodology" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Methodology</Link></li>
-                <li><Link href="/pricing" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Pricing</Link></li>
-                <li><Link href="/faq" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">FAQ</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-tertiary)] mb-4">
-                Tools
-              </h4>
-              <ul className="space-y-2 list-none p-0 m-0">
-                <li><Link href="/tools" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">All tools</Link></li>
-                <li><Link href="/cert" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Death Certificate</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-tertiary)] mb-4">
-                Pulse
-              </h4>
-              <ul className="space-y-2 list-none p-0 m-0">
-                <li><Link href="/pulse" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Latest issue</Link></li>
-                <li><Link href="/pulse" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Archive</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-tertiary)] mb-4">
-                Legal
-              </h4>
-              <ul className="space-y-2 list-none p-0 m-0">
-                <li><Link href="/privacy" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Privacy</Link></li>
-                <li><Link href="/terms" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Terms</Link></li>
-                <li><Link href="/cookies" className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors">Cookies</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-[var(--border)] pt-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.05em] text-[var(--text-tertiary)]">
-              METHODOLOGY V1.0 · 2026 PAVEL ISHCHIN
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 }
