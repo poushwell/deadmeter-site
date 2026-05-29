@@ -1,6 +1,7 @@
 interface FAQItem {
   question: string;
-  answer: string;
+  answer: React.ReactNode;
+  schemaAnswer?: string;
 }
 
 interface FAQBlockProps {
@@ -19,14 +20,16 @@ export function FAQBlock({
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: items.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer,
-      },
-    })),
+    mainEntity: items
+  .filter((item) => typeof item.answer === 'string' || item.schemaAnswer)
+  .map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.schemaAnswer ?? (typeof item.answer === 'string' ? item.answer : ''),
+    },
+  })),
   };
 
   return (

@@ -233,54 +233,37 @@ const lnk =
 const faqItems = [
   {
     question: 'Are these tools real-time?',
-    answer: (
-      <p className="text-[17px] text-[var(--text-secondary)] leading-[1.70]">
-        Yes. Each tool provides immediate results. Death Certificate processing takes 30-60
-        seconds due to comprehensive analysis. Other tools return results in under 5 seconds.
-      </p>
-    ),
+    answer:
+      'Yes. Each tool provides immediate results. Death Certificate processing takes 30-60 seconds due to comprehensive analysis. Other tools return results in under 5 seconds.',
   },
   {
     question: 'What languages do tools support?',
-    answer: (
-      <p className="text-[17px] text-[var(--text-secondary)] leading-[1.70]">
-        English only at v1.0. Tools reject non-English input with suggested alternatives.
-        Multilingual support is on the Year 1 roadmap conditional on Phase 0 validation success.
-      </p>
-    ),
+    answer:
+      'English only at v1.0. Tools reject non-English input with suggested alternatives. Multilingual support is on the Year 1 roadmap conditional on Phase 0 validation success.',
   },
   {
     question: 'Can I use tools through an API?',
     answer: (
-      <p className="text-[17px] text-[var(--text-secondary)] leading-[1.70]">
+      <>
         Yes, with a{' '}
         <Link href="/pricing" className={lnk}>
           Pro subscription
         </Link>{' '}
         or Scale tier. Free tier is web-only. API documentation appears on /docs after Pro signup.
-      </p>
+      </>
     ),
+    schemaAnswer:
+      'Yes, with a Pro subscription or Scale tier. Free tier is web-only. API documentation appears on /docs after Pro signup.',
   },
   {
     question: 'Are tool results shareable?',
-    answer: (
-      <p className="text-[17px] text-[var(--text-secondary)] leading-[1.70]">
-        Yes. Each result has a permanent URL with reproducibility hash. Death Certificate results
-        are cryptographically signed via Ed25519.
-      </p>
-    ),
+    answer:
+      'Yes. Each result has a permanent URL with reproducibility hash. Death Certificate results are cryptographically signed via Ed25519.',
   },
   {
     question: 'What is the difference between Cert and AI Text Checker?',
-    answer: (
-      <p className="text-[17px] text-[var(--text-secondary)] leading-[1.70]">
-        Cert is the comprehensive analysis: four-feature pipeline, bootstrap confidence intervals,
-        methodology disclosure, cryptographic signature. Latency 30-60 seconds. Diagnostic
-        quality. AI Text Checker is the lightweight first-pass: four-feature composite without LLM
-        inference, no confidence intervals, no signature. Latency under 2 seconds. Quick utility.
-        Different use cases. Both share the same underlying methodology direction.
-      </p>
-    ),
+    answer:
+      'Cert is the comprehensive analysis: four-feature pipeline, bootstrap confidence intervals, methodology disclosure, cryptographic signature. Latency 30-60 seconds. Diagnostic quality. AI Text Checker is the lightweight first-pass: four-feature composite without LLM inference, no confidence intervals, no signature. Latency under 2 seconds. Quick utility. Different use cases. Both share the same underlying methodology direction.',
   },
 ];
 
@@ -399,7 +382,7 @@ function ToolCard({ tool }: { tool: Tool }) {
         {isAvailable && tool.href ? (
           <Link
             href={tool.href}
-            className="inline-flex items-center gap-2 px-7 py-[14px] text-[14px] font-medium bg-[var(--accent)]  text-white  hover:bg-[var(--accent-hover)] transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-[14px] text-[14px] font-medium bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] transition-colors"
             aria-label={tool.ctaLabel}
           >
             {tool.ctaLabel}
@@ -565,9 +548,9 @@ export default function ToolsPage() {
           <div className="container">
             <div className="max-w-[720px]">
               <FAQBlock
-  items={faqItems}
-  includeSchema={false}
-/>
+                items={faqItems}
+                includeSchema={false}
+              />
             </div>
           </div>
         </section>
