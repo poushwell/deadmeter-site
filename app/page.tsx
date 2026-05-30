@@ -105,13 +105,13 @@ export default function LandingPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
   <Link
     href="/pulse"
-    className="w-full sm:w-auto inline-flex items-center justify-center px-[27px] py-[13px] border border-[var(--text-primary)] text-[var(--text-primary)] text-sm font-medium bg-[var(--accent)]  text-white  hover:bg-[var(--accent-hover)] hover:text-white transition-colors"
+    className="w-full sm:w-auto inline-flex items-center justify-center px-[27px] py-[13px] bg-[var(--accent)] text-white text-sm font-medium hover:bg-[var(--accent-hover)] transition-colors"
   >
     See latest Pulse
   </Link>
   <Link
     href="/cert"
-    className="w-full sm:w-auto inline-flex items-center justify-center px-[27px] py-[13px] border border-[var(--text-primary)] text-[var(--text-primary)] text-sm font-medium bg-[var(--accent)]  text-white  hover:bg-[var(--accent-hover)] hover:text-white transition-colors"
+    className="w-full sm:w-auto inline-flex items-center justify-center px-[27px] py-[13px] bg-[var(--accent)] text-white text-sm font-medium hover:bg-[var(--accent-hover)] transition-colors"
   >
     Run Death Certificate
   </Link>

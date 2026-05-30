@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const columns = [
   {
@@ -19,9 +22,9 @@ const columns = [
   {
     heading: 'Pulse',
     links: [
-      { href: '/pulse', label: 'Latest issue' },
-      { href: '/pulse', label: 'Pulse archive'      },
-      { href: '/pulse', label: 'Subscribe'    },
+      { href: '/pulse', label: 'Latest issue'  },
+      { href: '/pulse', label: 'Pulse archive' },
+      { href: '/pulse', label: 'Subscribe'     },
     ],
   },
   {
@@ -35,14 +38,22 @@ const columns = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+
+  function handleClick(href: string) {
+    if (pathname === href) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
   return (
     <footer className="bg-[var(--bg)] pt-16 pb-10">
       <div className="container">
         <div className="footer-grid grid grid-cols-2 gap-8 mb-14">
-          {/* Brand */}
           <div className="footer-brand col-span-2 md:col-span-1">
             <Link
               href="/"
+              onClick={() => handleClick('/')}
               className="font-serif text-2xl font-bold tracking-[-0.02em] text-[var(--text-primary)] block mb-3"
             >
               Deadmeter
@@ -62,6 +73,7 @@ export function Footer() {
                   <li key={label}>
                     <Link
                       href={href}
+                      onClick={() => handleClick(href)}
                       className="text-[14px] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors"
                     >
                       {label}
@@ -75,8 +87,8 @@ export function Footer() {
 
         <div className="border-t border-[var(--border)] pt-8">
           <p className="font-mono text-[11px] uppercase tracking-[0.05em] text-[var(--text-tertiary)]">
-  METHODOLOGY V1.0 · ········ · 2026 PAVEL ISHCHIN
-</p>
+            METHODOLOGY V1.0 · ········ · 2026 PAVEL ISHCHIN
+          </p>
         </div>
       </div>
     </footer>

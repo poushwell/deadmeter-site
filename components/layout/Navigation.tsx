@@ -18,6 +18,13 @@ interface NavigationProps {
 export function Navigation({ mobile = false, onLinkClick }: NavigationProps) {
   const pathname = usePathname();
 
+  function handleClick(href: string) {
+    if (pathname === href) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    if (onLinkClick) onLinkClick();
+  }
+
   if (mobile) {
     return (
       <ul className="flex flex-col list-none p-0 m-0">
@@ -27,7 +34,7 @@ export function Navigation({ mobile = false, onLinkClick }: NavigationProps) {
             <li key={href}>
               <Link
                 href={href}
-                onClick={onLinkClick}
+                onClick={() => handleClick(href)}
                 className={`block py-3 text-[15px] font-medium border-b border-[var(--border)] transition-colors ${
                   isActive
                     ? 'text-[var(--accent)]'
@@ -51,6 +58,7 @@ export function Navigation({ mobile = false, onLinkClick }: NavigationProps) {
           <Link
             key={href}
             href={href}
+            onClick={() => handleClick(href)}
             className={`text-[15px] font-medium transition-colors ${
               isActive
                 ? 'text-[var(--text-primary)] border-b border-[var(--text-primary)] pb-0.5'

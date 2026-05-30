@@ -67,7 +67,7 @@ export function PulseSignupForm({ centered = false, className = '' }: PulseSignu
             required
             disabled={state === 'loading'}
             autoComplete="email"
-            className="flex-1 px-4 py-3 border border-[var(--border)] bg-white text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] text-[16px] focus:outline-none focus:border-[var(--text-primary)] transition-colors disabled:opacity-60"
+            className="flex-1 px-4 py-3 border border-[var(--border)] bg-white text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] text-[16px] focus:outline-none focus-visible:outline-none focus:border-[var(--text-primary)] transition-colors disabled:opacity-60"
             style={{ borderRadius: 0 }}
           />
           <button

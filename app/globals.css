@@ -147,3 +147,17 @@ p a {
   border: 1px solid var(--border);
 }
 }
+::selection {
+  background: rgba(217, 119, 87, 0.25);
+  color: var(--text-primary);
+}
+#pulse-email:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+textarea:focus,
+input[type="url"]:focus,
+input[type="email"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

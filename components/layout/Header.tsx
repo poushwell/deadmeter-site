@@ -2,10 +2,19 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Navigation } from './Navigation';
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+function handleLogoClick(e: React.MouseEvent) {
+  if (pathname === '/') {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
 
   return (
     <header
@@ -14,9 +23,10 @@ export function Header() {
     >
       <div className="container flex items-center justify-between py-6">
         <Link
-          href="/"
-          className="font-serif text-2xl font-bold tracking-[-0.02em] text-[var(--text-primary)]"
-        >
+  href="/"
+  onClick={handleLogoClick}
+  className="font-serif text-2xl font-bold tracking-[-0.02em] text-[var(--text-primary)]"
+>
           Deadmeter
         </Link>
 
@@ -25,10 +35,10 @@ export function Header() {
           <Navigation />
           <Link
             href="/cert"
-            className="ml-2 px-[27px] py-[13px] border border-[var(--text-primary)] text-[14px] font-medium text-[var(--text-primary)] bg-[var(--accent)]  text-white  hover:bg-[var(--accent-hover)] transition-colors"
+            className="ml-2 px-[27px] py-[13px] text-[14px] font-medium bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] transition-colors"
             style={{ borderRadius: 0 }}
           >
-            Sign in
+            Sign up
           </Link>
         </div>
 
