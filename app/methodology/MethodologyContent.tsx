@@ -104,11 +104,12 @@ export default function MethodologyContent() {
             >
               Methodology
             </h1>
+            {/* FIX 1: hash '········' → real hash '4F7A2C91' (TZ_03 §4.14) */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-[var(--border)]">
               {([
                 ['Version',                  'v1.0'           ],
                 ['Last updated',             '2026-MM-DD'     ],
-                ['Hash',                     '········'       ],
+                ['Hash',                     '4F7A2C91'       ],
                 ['Reference implementation', 'deadmeter:v1.0' ],
               ] as [string, string][]).map(([label, value]) => (
                 <div key={label}>
@@ -155,9 +156,9 @@ export default function MethodologyContent() {
       <div className="container py-[80px] md:py-[100px]">
         <div className="lg:flex lg:gap-[80px] lg:items-start">
 
-          <aside className="hidden lg:block flex-shrink-0 sticky top-[108px] self-start" style={{ width: 250 }}>
+          <aside className="hidden lg:block flex-shrink-0 sticky top-[80px] self-start" style={{ width: 250 }}>
             <nav aria-label="Table of contents">
-              <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-tertiary)] mb-5 pt-10">Contents</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-tertiary)] mb-5">Contents</p>
               <ul className="space-y-0.5 list-none p-0 m-0">
                 {sections.map(({ id, num, title }) => (
                   <li key={id}>
@@ -271,6 +272,8 @@ export default function MethodologyContent() {
                 ))}
               </TableWrap>
               <P className="mb-6">Quarterly rotation refreshes 25% of the holdout. Three of nine attacks rotate per quarter. High-impact attacks rotate more frequently than stable attacks.</P>
+              {/* FIX 2: missing paragraph — TZ_03 §4.7 verbatim */}
+              <P className="mb-6">Per-attack degradation factors are reported transparently. Methodology degrades gracefully under most attacks. The fundamental limit of recursive paraphrasing is acknowledged in §10.</P>
               <P>Full benchmark results published at{' '}<InlineLink href="https://transparency.deadmeter.com/benchmarks" external>transparency.deadmeter.com/benchmarks</InlineLink>.</P>
             </section>
 
@@ -290,7 +293,8 @@ export default function MethodologyContent() {
                   </div>
                 ))}
               </TableWrap>
-              <P className="mb-6">Off-cycle minor increments may occur when a major adversarial discovery or significant accuracy regression triggers a methodology update.</P>
+              {/* FIX 3: 'triggers a methodology update' → 'triggers methodology update' (TZ_03 §4.8 verbatim) */}
+              <P className="mb-6">Off-cycle minor increments may occur when a major adversarial discovery or significant accuracy regression triggers methodology update.</P>
               <P>Every Cert and every Pulse publication includes the active methodology version and its SHA-256 hash. Historical methodology pages remain accessible at{' '}<InlineLink href="/methodology/v1-0">deadmeter.com/methodology/v1-0</InlineLink>,{' '}<InlineLink href="/methodology/v1-1">v1-1</InlineLink>, and so on.</P>
             </section>
 
@@ -305,7 +309,7 @@ export default function MethodologyContent() {
             <section id="section-7" className="mb-[80px]">
               <SectionHeading num="§7">Apolitical scope</SectionHeading>
               <P className="mb-6">Deadmeter does not measure or report on political content. No elections. No government information operations. No active conflicts. No partisan advocacy. No identity politics.</P>
-              <P className="mb-6">This is a permanent commitment, not a temporary positioning. The apolitical scope is implemented through:</P>
+              <P className="mb-6">This is permanent commitment, not a temporary positioning. The apolitical scope is implemented through:</P>
               <Bullet items={[
                 'Stream selection criteria that exclude political subreddits, political blog sources, and political forums',
                 <span key="ner">A NER-based filter in <InlineLink href="/tools/bs-meter">BS Meter</InlineLink> and <InlineLink href="/tools/dii">Dead Internet Index</InlineLink> that rejects inputs above a threshold density of named political entities</span>,
@@ -334,7 +338,7 @@ export default function MethodologyContent() {
                   ['Single-operator project.', 'This work is produced and maintained by one person with one tester. We do not currently have institutional review, redundant validation, or independent replication. Treat findings accordingly and weigh corroborating evidence highly.'],
                   ['Detection ceiling on adversarial text.', 'Following Sadasivan et al. (2023), no statistical detector can reliably distinguish AI-generated text from human-written text under sufficient paraphrasing. Our tools degrade gracefully under paraphrase attacks but cannot provide proof against motivated adversaries.'],
                   ['TPS_behavioral signals are observational proxies.', 'The five behavioral signals (NGCS, CRJ, AAR, IPTD, EA) are calibrated on stream-level patterns. They have not been validated against ground-truth labeling at the individual account level and should not be used to infer intent or identity for any specific account.'],
-                  ['Reservoir computing component excluded from v1.0.', 'The candidate fifth feature based on reservoir computing methodology is held back pending Phase 0 empirical validation. All scores reported in v1.0 use the four-feature configuration with the f3 by f4 interaction term only.'],
+                  ['Reservoir computing component is excluded from v1.0.', 'The candidate fifth feature based on reservoir computing methodology is held back pending Phase 0 empirical validation. All scores reported in v1.0 use the four-feature configuration with the f3 by f4 interaction term only.'],
                 ] as [string, string][]).map(([title, body], i) => (
                   <li key={i} className="grid grid-cols-[44px_1fr] items-start gap-4 border-t border-[var(--border)] py-6">
                     <span className="font-mono text-[13px] text-[var(--text-tertiary)] pt-[2px] font-feature-tnum">{String(i + 1).padStart(2, '0')}</span>
@@ -390,23 +394,25 @@ export default function MethodologyContent() {
                   </div>
                 ))}
               </TableWrap>
+              {/* FIX 4: opening sentence 'These results inform our positioning.' added — TZ_03 §4.13 verbatim */}
               <div className="bg-[var(--surface-dark)] px-10 py-10 mt-8 relative overflow-hidden">
                 <div className="absolute top-8 left-10 w-10 h-1 bg-[var(--accent)]" />
                 <p className="font-serif text-[var(--text-on-dark)] leading-[1.25] tracking-[-0.015em] mt-6 mb-4" style={{ fontSize: 'clamp(22px, 3vw, 32px)' }}>
                   We do not claim immunity. We claim calibrated, honest, versioned measurement.
                 </p>
                 <p className="text-[15px] text-[var(--text-on-dark-secondary)] leading-[1.65]">
-                  Death Certificate is presented as a diagnostic instrument, not adjudicative. IMS_ecosystem is presented with explicit adversarial degradation factors.
+                  These results inform our positioning. Death Certificate is presented as a diagnostic instrument, not adjudicative. IMS_ecosystem is presented with explicit adversarial degradation factors.
                 </p>
               </div>
             </section>
 
             <div className="border-t-2 border-[var(--text-primary)] bg-[var(--surface-warm)] p-8 mt-4">
               <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-tertiary)] mb-6">Methodology record</p>
+              {/* FIX 1 (footer): hash '········' → '4F7A2C91' (TZ_03 §4.14) */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
                 {([
                   ['Version',                  'v1.0'          ],
-                  ['Hash (SHA-256)',            '········'      ],
+                  ['Hash (SHA-256)',            '4F7A2C91'      ],
                   ['Reference implementation', 'deadmeter:v1.0'],
                   ['Active calibration corpus','C[X]_Q[Y]_2026'],
                   ['Last updated',             '2026-MM-DD'    ],
@@ -418,8 +424,10 @@ export default function MethodologyContent() {
                   </div>
                 ))}
               </div>
+              {/* FIX 5: added Calibration corpus access link — TZ_03 §4.14 */}
               <div className="border-t border-[var(--border)] pt-6 flex flex-wrap gap-x-6 gap-y-3">
                 <span className="text-[14px] text-[var(--text-tertiary)]">Download arXiv preprint (coming soon)</span>
+                <InlineLink href="https://deadmeter.com/transparency/datasets/calibration-baseline-v1" external>Calibration corpus access</InlineLink>
                 <InlineLink href="/methodology/v1-0">Methodology archive</InlineLink>
                 <InlineLink href="https://transparency.deadmeter.com/benchmarks" external>Adversarial benchmarks</InlineLink>
               </div>

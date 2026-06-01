@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+// TZ_02 §2.2: three columns exactly — Product | Pulse | Legal
+// No Cert column — Death Certificate is accessible via /tools
 const columns = [
   {
     heading: 'Product',
@@ -14,17 +16,11 @@ const columns = [
     ],
   },
   {
-    heading: 'Cert',
-    links: [
-      { href: '/cert', label: 'Death Certificate' },
-    ],
-  },
-  {
     heading: 'Pulse',
     links: [
-      { href: '/pulse', label: 'Latest issue'  },
-      { href: '/pulse', label: 'Pulse archive' },
-      { href: '/pulse', label: 'Subscribe'     },
+      { href: '/pulse',            label: 'Pulse'         },
+      { href: '/pulse',            label: 'Pulse archive' },
+      { href: '/pulse#subscribe',  label: 'Subscribe'     },
     ],
   },
   {
@@ -49,8 +45,10 @@ export function Footer() {
   return (
     <footer className="bg-[var(--bg)] pt-16 pb-10">
       <div className="container">
-        <div className="footer-grid grid grid-cols-2 gap-8 mb-14">
-          <div className="footer-brand col-span-2 md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-14">
+
+          {/* Logo + tagline */}
+          <div className="col-span-1">
             <Link
               href="/"
               onClick={() => handleClick('/')}
@@ -63,6 +61,7 @@ export function Footer() {
             </p>
           </div>
 
+          {/* Link columns — TZ_02 §2.2 */}
           {columns.map((col) => (
             <div key={col.heading}>
               <h4 className="font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--text-tertiary)] mb-4">
@@ -83,11 +82,13 @@ export function Footer() {
               </ul>
             </div>
           ))}
+
         </div>
 
+        {/* Bottom row — TZ_03 verbatim: mixed case, real hash */}
         <div className="border-t border-[var(--border)] pt-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.05em] text-[var(--text-tertiary)]">
-            METHODOLOGY V1.0 · ········ · 2026 PAVEL ISHCHIN
+          <p className="font-mono text-[11px] tracking-[0.05em] text-[var(--text-tertiary)]">
+            Methodology v1.0 · 4F7A2C91 · 2026 Pavel Ishchin
           </p>
         </div>
       </div>
