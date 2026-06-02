@@ -409,7 +409,7 @@ export default async function PulseIssuePage({
               <p className="text-[17px] leading-[1.70] mb-8" style={{ color: 'rgba(255,255,255,0.85)' }}>
                 Pulse arrives weekly. A short, sober summary of the week&apos;s measurements across our three monitored streams. Tuesday mornings.
               </p>
-              <PulseSignupForm source="pulse-page" />
+              <PulseSignupForm />
               {/* TZ_03 §9.4 verbatim */}
               <p className="text-[13px] leading-[1.60] mt-5" style={{ color: 'rgba(255,255,255,0.65)' }}>
                 We send Pulse and nothing else. No marketing. No tracking pixels. No promotional sequences. One click to unsubscribe.
