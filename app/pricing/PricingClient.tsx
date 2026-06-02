@@ -1,7 +1,7 @@
 /**
  * app/pricing/PricingClient.tsx — Client Component
  *
- * All interactive logic (billing toggle) lives here.
+ * All interactive logic (billing toggle + Free-tier magic-link signup) lives here.
  * Imported by app/pricing/page.tsx (Server Component).
  *
  * TZ_02 §6 — structure, layout, anti-patterns
@@ -9,8 +9,12 @@
  * TZ_05 Part 2 §1.3 — tier card CSS spec
  * TZ_05 Part 1 — buttons, colors, spacing
  *
- * TODO (Lemon Squeezy): replace href="#" on all checkout buttons
- *      with real URLs when Pavel creates products in LS dashboard.
+ * "Sign up free" (TZ_02 §6.7): inline expansion within the Free card that calls
+ *      /api/auth/magic-link — same flow as Header.tsx. No separate page (page map
+ *      is fixed per TZ_01 §6/§12), no modal (TZ_02 §6.5/§6.7: inline only).
+ *
+ * TODO (Lemon Squeezy): replace href="#" on all CHECKOUT buttons (Pro, Scale,
+ *      Founder, Starter, Bulk) with real URLs when Pavel creates products in LS.
  * founderRemaining prop: live count from get_founder_lifetime_remaining() RPC (TZ_04 §8.4).
  */
 
@@ -92,6 +96,29 @@ interface PricingClientProps {
 
 export function PricingClient({ founderRemaining }: PricingClientProps) {
   const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly');
+
+  // Free-tier magic-link signup (TZ_02 §6.7) — same call as Header.tsx
+  const [signupOpen, setSignupOpen] = useState(false);
+  const [email, setEmail] = useState('');
+  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  async function handleSignup(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSending(true);
+    try {
+      await fetch('/api/auth/magic-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+    } finally {
+      // Always show success — email enumeration protection (matches /api/auth/magic-link)
+      setSent(true);
+      setSending(false);
+    }
+  }
 
   return (
     <main id="main-content">
@@ -216,17 +243,49 @@ export function PricingClient({ founderRemaining }: PricingClientProps) {
                   <Feature key={t} text={t} />
                 ))}
               </ul>
+
               {/*
-                TZ_02 §6.7: "Sign up free" → /api/auth/magic-link signup flow
-                TODO: wire to magic-link auth modal when Header sign-in
-                      form component is built. href="#" prevents 405 error.
+                "Sign up free" — TZ_02 §6.7: → /api/auth/magic-link signup flow.
+                Inline expansion within the card (no separate page, no modal).
+                Three states: idle button → email form → "check your email".
               */}
-              <Link
-                href="#"
-                className="inline-flex items-center justify-center w-full px-6 py-[14px] text-[14px] font-medium border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--accent)] hover:border-[var(--accent)] hover:text-white transition-colors"
-              >
-                Sign up free
-              </Link>
+              {sent ? (
+                <div className="border border-[var(--border)] bg-[var(--paper)] p-3">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-tertiary)] mb-1">
+                    Check your email
+                  </p>
+                  <p className="text-[13px] text-[var(--text-secondary)] leading-[1.5]">
+                    We sent a sign-in link to {email}.
+                  </p>
+                </div>
+              ) : signupOpen ? (
+                <form onSubmit={handleSignup} className="flex flex-col gap-2">
+                  <input
+                    type="email"
+                    aria-label="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    required
+                    className="w-full border border-[var(--border)] bg-[var(--bg)] px-3 py-2.5 text-[13px] font-mono text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none focus:border-[var(--text-primary)]"
+                  />
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="w-full px-6 py-[14px] text-[14px] font-medium border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--accent)] hover:border-[var(--accent)] hover:text-white disabled:opacity-50 transition-colors"
+                  >
+                    {sending ? 'Sending...' : 'Sign up free'}
+                  </button>
+                </form>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setSignupOpen(true)}
+                  className="inline-flex items-center justify-center w-full px-6 py-[14px] text-[14px] font-medium border border-[var(--text-primary)] text-[var(--text-primary)] hover:bg-[var(--accent)] hover:border-[var(--accent)] hover:text-white transition-colors"
+                >
+                  Sign up free
+                </button>
+              )}
             </article>
 
             {/* ── PRO ───────────────────────────────────────────────────── */}
@@ -492,7 +551,6 @@ export function PricingClient({ founderRemaining }: PricingClientProps) {
               $99 once. Pro forever. Limited to 200 supporters.
             </p>
 
-            {/*
             {/* Live Founder counter — TZ_02 §6.5, TZ_03 §6.6 */}
             {/* founderRemaining: null=RPC failed | 0=sold out | N=spots left */}
             <div className="inline-flex items-center gap-3 border border-[var(--border)] px-4 py-3 mb-8">
